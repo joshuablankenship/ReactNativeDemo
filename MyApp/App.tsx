@@ -1,20 +1,22 @@
-
- import React from 'react';
- import {
-   View,
- } from 'react-native';
-
+import React from 'react';
+import 'react-native-gesture-handler';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import Login from './containers/Login';
 
- const App = () => {
+const Stack = createStackNavigator();
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{title: 'Cat Facts', headerTintColor: 'black'}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
-   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-    <Login/>
-  </View>
-       
-   );
- };
-
-
- export default App;
+export default App;
