@@ -12,10 +12,6 @@ const Images = props => {
   const [entries, setEntries] = useState([]);
   const carouselRef = useRef(null);
 
-  //   const goForward = () => {
-  //     carouselRef.current.snapToNext();
-  //   };
-
   useEffect(() => {
     return setEntries(CatPics);
   }, []);
