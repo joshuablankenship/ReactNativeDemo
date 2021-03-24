@@ -1,22 +1,39 @@
 import React, {Component} from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {View} from 'react-native';
 import {styles} from '../styles/LoginStyles';
+import CatInfo from '../assets/CatInfo';
+import CatList from '../components/CatList';
 
-export default class Main extends Component {
+interface AppProps {}
+interface AppState {
+  catInfo: Array<any>;
+  selectedBreed: string;
+}
+export default class Main extends Component<AppProps, AppState> {
+  constructor(props: AppProps | Readonly<AppProps>) {
+    super(props);
+    this.state = {
+      catInfo: CatInfo,
+      selectedBreed: '',
+    };
+  }
   _onPressButton = async () => {};
 
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.container}>
-          <Image source={require('../images/PYh.gif')} />
-          <View style={styles.alternativeLayoutButtonContainer} />
-          <TouchableOpacity style={styles.button} onPress={this._onPressButton}>
-            <Image source={require('../images/Google.png')} />
-            <Text> Login with Google</Text>
-          </TouchableOpacity>
-        </View>
+        <CatList />
+        {/* <Images /> */}
       </View>
     );
+  }
+  pickerChange(index: number): void {
+    this.state.catInfo.map((_v, i) => {
+      if (index === i) {
+        this.setState({
+          selectedBreed: this.state.catInfo[index].name,
+        });
+      }
+    });
   }
 }
