@@ -12,7 +12,6 @@ export default class Login extends Component<Props> {
     try {
       // const result = await authorize(config);
       this.props.navigation.navigate('Main');
-      // console.warn(result);
       // result includes accessToken, accessTokenExpirationDate and refreshToken
     } catch (error) {
       console.log(error);

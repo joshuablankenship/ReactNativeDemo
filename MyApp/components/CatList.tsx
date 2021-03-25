@@ -1,40 +1,41 @@
 import React, {useState} from 'react';
-import {
-  FlatList,
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
-import CatInfo from '../assets/CatInfo';
+import {FlatList, SafeAreaView, Text, TouchableOpacity} from 'react-native';
+import {styles} from '../styles/CatListStyles';
 
-
-const Item = ({item, onPress, style}) => (
-  <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
-    <Text style={styles.title}>{item.name}</Text>
-  </TouchableOpacity>
-);
-
-const CatList = () => {
+type Props = {
+  navigation: any;
+  route: any;
+  info: any;
+};
+const CatList = ({info, navigation}: Props) => {
   const [selectedId, setSelectedId] = useState(null);
-
-  const renderItem = ({item}) => {
-    const backgroundColor = item.id === selectedId ? '#e6f2f5' : '#e1e5e6';
-
+  const _onPressButton = (breed: string) => {
+    let arr = info.filter((cat: {name: string}) => cat.name === breed);
+    try {
+      navigation.navigate('Description', {
+        params: [breed, arr],
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const renderItem = (item: any) => {
     return (
-      <Item
-        item={item}
-        onPress={() => setSelectedId(item.id)}
-        style={{backgroundColor}}
-      />
+      <TouchableOpacity
+        onPress={() => {
+          setSelectedId(item.id);
+          _onPressButton(item.name);
+        }}
+        style={[styles.item]}>
+        <Text style={styles.title}>{item.name}</Text>
+      </TouchableOpacity>
     );
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={CatInfo}
+        data={info}
         renderItem={renderItem}
         keyExtractor={item => item.id}
         extraData={selectedId}
@@ -43,17 +44,3 @@ const CatList = () => {
   );
 };
 export default CatList;
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
-  },
-  item: {
-    padding: 20,
-    marginVertical: 1,
-    marginHorizontal: 16,
-  },
-  title: {
-    fontSize: 32,
-  },
-});

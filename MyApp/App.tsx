@@ -7,20 +7,25 @@ import Login from './containers/Login';
 import Main from './containers/Main';
 import Description from './containers/Description';
 
-const Stack = createStackNavigator();
+export type RootStackParamList = {
+  Login: undefined;
+  Description: {breed: string; catInfo: any} | undefined;
+  Main: undefined;
+};
+const Stack = createStackNavigator<RootStackParamList>();
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen
-          name="Description"
-          component={Description}
-          options={{title: 'Cat Facts', headerTintColor: 'black'}}
-        />
         <Stack.Screen
           name="Login"
           component={Login}
           options={{title: 'Cat Facts', headerTintColor: 'black'}}
+        />
+        <Stack.Screen
+          name="Description"
+          component={Description}
+          options={{title: 'Cat Description', headerTintColor: 'black'}}
         />
         <Stack.Screen
           name="Main"

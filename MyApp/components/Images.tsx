@@ -1,22 +1,24 @@
 import React, {useRef, useState, useEffect} from 'react';
 import Carousel, {
   ParallaxImage,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ParallaxImageProperties,
 } from 'react-native-snap-carousel';
-import {View, Text, Dimensions, StyleSheet, Platform} from 'react-native';
-import CatPics from '../assets/CatPics';
+import {View, Text, Dimensions} from 'react-native';
+import {getImages} from '../services/HttpService';
+import {styles} from '../styles/ImageStyles';
 
-const {width: screenWidth} = Dimensions.get('window');
+export const {width: screenWidth} = Dimensions.get('window');
 
-const Images = props => {
+const Images = (props: {breedName: string}) => {
   const [entries, setEntries] = useState([]);
   const carouselRef = useRef(null);
 
   useEffect(() => {
-    return setEntries(CatPics);
-  }, []);
-  const renderItem = (
-    {item, index}: any,
+    getImages(props.breedName).then((res: any) => setEntries(res));
+  }, [props.breedName]);
+  const _renderItem = (
+    {item}: any,
     parallaxProps: JSX.IntrinsicAttributes &
       JSX.IntrinsicClassAttributes<ParallaxImage> &
       Readonly<ParallaxImageProperties> &
@@ -24,30 +26,27 @@ const Images = props => {
   ) => (
     <View style={styles.item}>
       <ParallaxImage
+        //@ts-ignore
         source={{uri: item.url}}
         containerStyle={styles.imageContainer}
         style={styles.image}
         parallaxFactor={0.4}
         {...parallaxProps}
       />
-      <Text style={styles.title} numberOfLines={2}>
-        {item.name}
-      </Text>
+      <Text numberOfLines={2}>{item.name}</Text>
     </View>
   );
 
   return (
     <View style={styles.container}>
-      {/* <TouchableOpacity onPress={goForward}>
-        <Text>go to next slide</Text>
-      </TouchableOpacity> */}
       <Carousel
         ref={carouselRef}
         sliderWidth={screenWidth}
         sliderHeight={screenWidth}
         itemWidth={screenWidth - 60}
         data={entries}
-        renderItem={renderItem}
+        //@ts-ignore
+        renderItem={_renderItem}
         hasParallaxImages={true}
       />
     </View>
@@ -55,25 +54,3 @@ const Images = props => {
 };
 
 export default Images;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignContent: 'center',
-    alignItems: 'center',
-  },
-  item: {
-    width: screenWidth - 60,
-    height: screenWidth - 60,
-  },
-  imageContainer: {
-    flex: 1,
-    marginBottom: Platform.select({ios: 0, android: 1}), // Prevent a random Android rendering issue
-    backgroundColor: 'white',
-    borderRadius: 8,
-  },
-  image: {
-    ...StyleSheet.absoluteFillObject,
-    resizeMode: 'cover',
-  },
-});

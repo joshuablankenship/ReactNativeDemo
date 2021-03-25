@@ -1,86 +1,54 @@
-import React, {useState} from 'react';
-import {Linking, StatusBar, StyleSheet, Text} from 'react-native';
+import React from 'react';
+import {Linking, Text} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import CatInfo from '../assets/CatInfo';
 import Star from 'react-native-star-view';
 import Images from '../components/Images';
-const Description = props => {
+import {styles} from '../styles/DescriptionStyles';
+
+type Props = {
+  route: any;
+};
+const Description = ({route}: Props) => {
+  const info = route.params.params[1][0];
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>{CatInfo[0].name}</Text>
-      <Images breedId={CatInfo[0].id} />
-      <Text style={styles.text}>{CatInfo[0].description}</Text>
-      <Text style={styles.textBold}>{CatInfo[0].temperament}</Text>
+      <Text style={styles.title}>{info.name}</Text>
+      <Images breedName={info.id} />
+      <Text style={styles.text}>{info.description}</Text>
+      <Text style={styles.textBold}>{info.temperament}</Text>
       <Text
         style={styles.link}
-        onPress={() => Linking.openURL(CatInfo[0].wikipedia_url)}>
+        onPress={() => Linking.openURL(info.wikipedia_url)}>
         Wikipedia
       </Text>
       <Text style={styles.text}>Affection Level</Text>
-      <Star score={CatInfo[0].affection_level} style={styles.starStyle} />
+      <Star score={info.affection_level} style={styles.starStyle} />
       <Text style={styles.text}>Adaptability</Text>
-      <Star score={CatInfo[0].adaptability} style={styles.starStyle} />
+      <Star score={info.adaptability} style={styles.starStyle} />
       <Text style={styles.text}>Child Friendly</Text>
-      <Star score={CatInfo[0].child_friendly} style={styles.starStyle} />
+      <Star score={info.child_friendly} style={styles.starStyle} />
       <Text style={styles.text}>Dog Friendly</Text>
-      <Star score={CatInfo[0].dog_friendly} style={styles.starStyle} />
+      <Star score={info.dog_friendly} style={styles.starStyle} />
       <Text style={styles.text}>Energy Level</Text>
-      <Star score={CatInfo[0].energy_level} style={styles.starStyle} />
+      <Star score={info.energy_level} style={styles.starStyle} />
       <Text style={styles.text}>Health Issues</Text>
-      <Star score={CatInfo[0].health_issues} style={styles.starStyle} />
+      <Star score={info.health_issues} style={styles.starStyle} />
       <Text style={styles.text}>Intelligence</Text>
-      <Star score={CatInfo[0].intelligence} style={styles.starStyle} />
+      <Star score={info.intelligence} style={styles.starStyle} />
       <Text style={styles.text}>Shedding Level</Text>
-      <Star score={CatInfo[0].shedding_level} style={styles.starStyle} />
+      <Star score={info.shedding_level} style={styles.starStyle} />
       <Text style={styles.text}>Grooming</Text>
-      <Star score={CatInfo[0].grooming} style={styles.starStyle} />
+      <Star score={info.grooming} style={styles.starStyle} />
       <Text style={styles.text}>Social Needs</Text>
-      <Star score={CatInfo[0].social_needs} style={styles.starStyle} />
+      <Star score={info.social_needs} style={styles.starStyle} />
       <Text style={styles.text}>Stranger Friendly</Text>
-      <Star score={CatInfo[0].stranger_friendly} style={styles.starStyle} />
+      <Star score={info.stranger_friendly} style={styles.starStyle} />
       <Text style={styles.text}>Vocalization</Text>
-      <Star score={CatInfo[0].intelligence} style={styles.starStyle} />
+      <Star score={info.intelligence} style={styles.starStyle} />
       <Text style={styles.text}>Shedding Level</Text>
-      <Star score={CatInfo[0].vocalisation} style={styles.starStyle} />
+      <Star score={info.vocalisation} style={styles.starStyle} />
     </ScrollView>
   );
 };
 
 export default Description;
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
-  },
-  item: {
-    padding: 20,
-    marginVertical: 1,
-    marginHorizontal: 16,
-  },
-  link: {
-    marginHorizontal: 16,
-    marginTop: 5,
-    color: 'blue',
-  },
-  text: {
-    marginHorizontal: 16,
-    marginTop: 5,
-  },
-  textBold: {
-    marginHorizontal: 16,
-    marginTop: 5,
-    fontWeight: 'bold',
-  },
-  title: {
-    fontSize: 32,
-    marginHorizontal: 16,
-    fontWeight: 'bold',
-  },
-  starStyle: {
-    width: 100,
-    height: 20,
-    marginBottom: 5,
-    marginLeft: 13,
-    marginTop: 5,
-  },
-});
