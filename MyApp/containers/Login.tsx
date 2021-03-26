@@ -7,7 +7,7 @@ interface Props {
   navigation: any;
 }
 export default class Login extends Component<Props> {
-  _onPressButton = async () => {
+  _onPressButtonGoogle = async () => {
     // use the client to make the auth request and receive the authState
     try {
       const result = await authorize(config);
@@ -19,7 +19,9 @@ export default class Login extends Component<Props> {
       console.log(error);
     }
   };
-
+  _onPressButton = async () => {
+    this.props.navigation.navigate('Main');
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -27,7 +29,9 @@ export default class Login extends Component<Props> {
           <Image source={require('../images/PYh.gif')} />
           <View style={styles.alternativeLayoutButtonContainer} />
 
-          <TouchableOpacity style={styles.button} onPress={this._onPressButton}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={this._onPressButtonGoogle}>
             <Image source={require('../images/Google.png')} />
             <Text> Login with Google</Text>
           </TouchableOpacity>
