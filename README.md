@@ -12,6 +12,7 @@ Then navigate to the \ios\ directory and run
 `pod install`
 then run
 `npm ios`
+in the main application directory
 ```
 
 
