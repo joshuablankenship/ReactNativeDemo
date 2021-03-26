@@ -3,8 +3,8 @@ import {StyleSheet} from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //  justifyContent: 'center',
-    //  alignItems: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   header: {
     marginTop: 60,
@@ -21,7 +21,6 @@ export const styles = StyleSheet.create({
     margin: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // alignItems: 'center',
   },
   button: {
     backgroundColor: '#859a9b',
@@ -38,5 +37,29 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     flex: -1,
+  },
+  buttonCenter: {
+    backgroundColor: '#859a9b',
+    borderRadius: 20,
+    padding: 10,
+    marginBottom: 20,
+    marginRight: 110,
+    marginLeft: 110,
+    shadowColor: '#303838',
+    shadowOffset: {width: 0, height: 5},
+    shadowRadius: 10,
+    shadowOpacity: 0.35,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: -1,
+  },
+  link: {
+    marginBottom: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flex: -1,
+    marginTop: 5,
+    color: 'blue',
   },
 });

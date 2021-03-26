@@ -23,14 +23,14 @@ const App = () => {
           options={{title: 'Cat Facts', headerTintColor: 'black'}}
         />
         <Stack.Screen
-          name="Description"
-          component={Description}
-          options={{title: 'Cat Description', headerTintColor: 'black'}}
-        />
-        <Stack.Screen
           name="Main"
           component={Main}
           options={{title: 'Select a Breed', headerTintColor: 'black'}}
+        />
+        <Stack.Screen
+          name="Description"
+          component={Description}
+          options={{title: 'Cat Description', headerTintColor: 'black'}}
         />
       </Stack.Navigator>
     </NavigationContainer>

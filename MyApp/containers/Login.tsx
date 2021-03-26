@@ -10,8 +10,10 @@ export default class Login extends Component<Props> {
   _onPressButton = async () => {
     // use the client to make the auth request and receive the authState
     try {
-      // const result = await authorize(config);
-      this.props.navigation.navigate('Main');
+      const result = await authorize(config);
+      if (result.accessToken) {
+        this.props.navigation.navigate('Main');
+      }
       // result includes accessToken, accessTokenExpirationDate and refreshToken
     } catch (error) {
       console.log(error);
@@ -24,10 +26,14 @@ export default class Login extends Component<Props> {
         <View style={styles.container}>
           <Image source={require('../images/PYh.gif')} />
           <View style={styles.alternativeLayoutButtonContainer} />
+
           <TouchableOpacity style={styles.button} onPress={this._onPressButton}>
             <Image source={require('../images/Google.png')} />
             <Text> Login with Google</Text>
           </TouchableOpacity>
+          <Text style={styles.link} onPress={this._onPressButton}>
+            Continue
+          </Text>
         </View>
       </View>
     );

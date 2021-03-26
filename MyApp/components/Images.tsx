@@ -10,13 +10,17 @@ import {styles} from '../styles/ImageStyles';
 
 export const {width: screenWidth} = Dimensions.get('window');
 
-const Images = (props: {breedName: string}) => {
+type Props = {
+  breedName: string;
+};
+const Images = ({breedName}: Props) => {
   const [entries, setEntries] = useState([]);
   const carouselRef = useRef(null);
 
   useEffect(() => {
-    getImages(props.breedName).then((res: any) => setEntries(res));
-  }, [props.breedName]);
+    getImages(breedName).then((res: any) => setEntries(res));
+  }, [breedName]);
+
   const _renderItem = (
     {item}: any,
     parallaxProps: JSX.IntrinsicAttributes &
